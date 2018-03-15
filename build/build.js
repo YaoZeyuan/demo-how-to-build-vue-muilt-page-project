@@ -1,6 +1,6 @@
 'use strict'
 require('./check-versions')()
-
+// 设定运行环境
 process.env.NODE_ENV = 'production'
 
 const ora = require('ora')
@@ -12,11 +12,12 @@ const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 
 const spinner = ora('building for production...')
-spinner.start()
+spinner.start() // 开始转loading的光标
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, (err, stats) => {
+    // 编译完成. 停止loading
     spinner.stop()
     if (err) throw err
     process.stdout.write(stats.toString({
