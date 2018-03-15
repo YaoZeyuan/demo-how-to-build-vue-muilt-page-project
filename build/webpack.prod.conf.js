@@ -122,8 +122,13 @@ const env = require('../config/prod.env')
 
 // 最终合并结果
 const webpackConfig = {
+  // 指定解析时根目录地址
   context: path.resolve(__dirname, '../'),
+  // 指定输出的source-map级别, webpack打包出来的是一整个js文件, debug的时候很不方便, 因此需要webpack额外输出一份source-map来帮助浏览器正确展示js内容, 一般来说, 线上使用false , 测试环境使用 `#cheap-module-source-map` 就可以了
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
+  // 入口文件地址
+  // 如果参数是对象的话, 那么 key 是输出的文件名(对应[name]占位符), value 是具体的入口文件地址
+  // 如果项目是多入口形式的话只要在这儿加上key => value对应关系就可以了
   entry: {
     app: './src/main.js'
   },
