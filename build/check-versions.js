@@ -1,5 +1,6 @@
 'use strict'
-const chalk = require('chalk')
+// 检查npm & node版本是否符合要求
+const chalk = require('chalk') // 打印彩色的log
 const semver = require('semver')
 const packageConfig = require('../package.json')
 const shell = require('shelljs')
@@ -10,6 +11,7 @@ function exec (cmd) {
 
 const versionRequirements = [
   {
+    // node版本
     name: 'node',
     currentVersion: semver.clean(process.version),
     versionRequirement: packageConfig.engines.node
@@ -18,6 +20,7 @@ const versionRequirements = [
 
 if (shell.which('npm')) {
   versionRequirements.push({
+    // npm版本
     name: 'npm',
     currentVersion: exec('npm --version'),
     versionRequirement: packageConfig.engines.npm
